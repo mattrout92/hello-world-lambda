@@ -1,0 +1,20 @@
+service: test
+app: test
+tenant: mattrout92
+
+provider:
+  name: aws
+  runtime: go1.x
+  timeout: 15
+
+  stage: v1
+  region: eu-west-2
+
+functions:
+  test:
+    handler: bin/hello-world-lambda
+    description: "does it work"
+    events:
+      - http:
+          path: /hello
+          method: get
