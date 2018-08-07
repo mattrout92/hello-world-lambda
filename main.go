@@ -4,28 +4,21 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/gorilla/mux"
+
 	"github.com/aws/aws-lambda-go/events"
+	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/awslabs/aws-lambda-go-api-proxy/gorillamux"
-	optimus "github.com/pjebs/optimus-go"
 )
 
-var OptimusDecode = optimus.New(1322293361, 1216882833, 2078473863)
-
 func main() {
-	/*r := mux.NewRouter()
+	r := mux.NewRouter()
 
 	r.Methods("GET").Path("/hello").HandlerFunc(hello)
 
 	apr := gorillamux.New(r)
 
-	lambda.Start(lambdaProxy(apr))*/
-
-	fmt.Println(Encode(1))
-
-}
-
-func Encode(v int) int {
-	return int(OptimusDecode.Encode(uint64(v)))
+	lambda.Start(lambdaProxy(apr))
 }
 
 func lambdaProxy(apr *gorillamux.GorillaMuxAdapter) func(events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
